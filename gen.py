@@ -2,6 +2,7 @@ import os
 import google.generativeai as palm
 from google.api_core import client_options as client_options_lib
 from google.api_core import retry
+import random
 
 
 palm.configure(
@@ -48,3 +49,44 @@ print(completion.result)
 prompt = "Show me how to [...]"
 
 completion = generate_text(prompt)
+
+prompt_template = """
+{priming}
+
+{question}
+
+{decorator}
+
+Your solution:
+"""
+
+priming_text = "You are an expert at writing clear, concise, Python code."
+
+question = "create a doubly linked list"
+
+decorator = "Insert comments for each line of code."
+
+prompt = prompt_template.format(priming=priming_text,
+                                question=question,
+                                decorator=decorator)
+
+print(prompt)
+
+completion = generate_text(prompt)
+print(completion.result)
+
+question = """create a very large list of random numbers in python, 
+and then write code to sort that list"""
+
+prompt = prompt_template.format(priming=priming_text,
+                                question=question,
+                                decorator=decorator)
+
+print(prompt)
+
+completion = generate_text(prompt)
+print(completion.result)
+
+
+random_numbers = [random.randint(0, 100) for _ in range(100000)]
+print(random_numbers)
