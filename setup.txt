@@ -1,0 +1,4 @@
+PALM_KEY="YOUR KEY HERE"
+curl -H 'Content-Type: application/json' \
+     -d '{"prompt": {text: "Give me five subcategories of jazz"} }' \
+     "https://generativelanguage.googleapis.com/v1beta3/models/text-bison-001:generateText?key=${PALM_KEY}"
